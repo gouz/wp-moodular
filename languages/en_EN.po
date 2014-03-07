@@ -1,0 +1,120 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Moodular\n"
+"POT-Creation-Date: 2014-03-07 09:29+0100\n"
+"PO-Revision-Date: 2014-03-07 09:29+0100\n"
+"Last-Translator: Ben <benjamin.pongy@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_nx\n"
+"X-Poedit-Basepath: ../\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: wp-moodular.php:23
+msgid "Moodular"
+msgstr ""
+
+#: wp-moodular.php:24
+msgid "Parent Item:"
+msgstr ""
+
+#: wp-moodular.php:25
+msgid "All Items"
+msgstr ""
+
+#: wp-moodular.php:26
+msgid "View Item"
+msgstr ""
+
+#: wp-moodular.php:27
+msgid "Add New Item"
+msgstr ""
+
+#: wp-moodular.php:28
+msgid "Add New"
+msgstr ""
+
+#: wp-moodular.php:29
+msgid "Edit Item"
+msgstr ""
+
+#: wp-moodular.php:30
+msgid "Update Item"
+msgstr ""
+
+#: wp-moodular.php:31
+msgid "Search Item"
+msgstr ""
+
+#: wp-moodular.php:32
+msgid "Not found"
+msgstr ""
+
+#: wp-moodular.php:33
+msgid "Not found in Trash"
+msgstr ""
+
+#: wp-moodular.php:36
+msgid "moodular"
+msgstr ""
+
+#: wp-moodular.php:37
+msgid "Moodular description"
+msgstr ""
+
+#: wp-moodular.php:71
+msgid "Slides"
+msgstr ""
+
+#: wp-moodular.php:72
+msgid "All slides"
+msgstr ""
+
+#: wp-moodular.php:73
+msgid "Parent slide"
+msgstr ""
+
+#: wp-moodular.php:74
+msgid "Parent slide:"
+msgstr ""
+
+#: wp-moodular.php:75
+msgid "New slide Name"
+msgstr ""
+
+#: wp-moodular.php:76
+msgid "Add new slide"
+msgstr ""
+
+#: wp-moodular.php:77
+msgid "Edit slide"
+msgstr ""
+
+#: wp-moodular.php:78
+msgid "Update slide"
+msgstr ""
+
+#: wp-moodular.php:79
+msgid "Separate slides with commas"
+msgstr ""
+
+#: wp-moodular.php:80
+msgid "Search slides"
+msgstr ""
+
+#: wp-moodular.php:81
+msgid "Add or remove slides"
+msgstr ""
+
+#: wp-moodular.php:82
+msgid "Choose from the most used slides"
+msgstr ""
+
+#: wp-moodular.php:83
+msgid "Not Found"
+msgstr ""

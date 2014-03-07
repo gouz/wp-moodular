@@ -28,7 +28,7 @@ jQuery(document).ready(function() {
 		if ( $moodular->have_posts() ) {
 			while ( $moodular->have_posts() ) {
 				$moodular->the_post();
-				$test =& get_children(array('post_parent' => get_the_ID(), 'post_type' => 'moodular'));
+				$test = get_children(array('post_parent' => get_the_ID(), 'post_type' => 'moodular'));
 				$nb = count($test);
 				if( $nb )
 					$moods .= '<option value="'.get_the_ID().'">'.get_the_title().' ('.count($test).' images)</option>';
