@@ -115,3 +115,9 @@ function moodular_popup() {
 	require_once('moodular-popup.php');
 }
 add_action('admin_footer', 'moodular_popup');
+
+function moodular_script() {
+	wp_enqueue_style( 'moodular', plugins_url('wp-moodular') . '/moodular.min.css', array(), '4.3' );
+	wp_enqueue_script( 'moodular', plugins_url('wp-moodular') . '/moodular.min.js', array( 'jquery' ), '4.3' );
+}
+add_action( 'wp_enqueue_scripts', 'moodular_script' );
