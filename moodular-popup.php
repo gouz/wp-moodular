@@ -3,7 +3,7 @@
 	$(document).ready(function() {
 	    $(".insert-moo").click(function() {
 	    	var vitesse = parseFloat($('#vitesse').val().replace(',', '.')) * 1000,
-	    		aleatoire = (typeof $('#moodular-random:checked').val() == 'undefined' ? '' : ' random="' + aleatoire + '"',
+	    		aleatoire = (typeof $('#moodular-random:checked').val() == 'undefined' ? '' : ' random="' + aleatoire + '"'),
 	    		shortcode_moodular = '[slider id="'+$('#s-moodular').val()+'" v="'+vitesse+'" transition="'+$('#s-transition').val()+'" ctrl="'+$('#s-ctrl').val()+'" aff="'+$('#s-aff').val()+'" '+aleatoire+']',
 				winmoo = window.dialogArguments || opener || parent || top;
 			winmoo.send_to_editor(shortcode_moodular);
