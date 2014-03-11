@@ -9,30 +9,21 @@
 			winmoo.send_to_editor(shortcode_moodular);
 	    });
 	});
-})(window.jQuery)
+})(window.jQuery);
 </script>
 <div style="display:none;" id="moodular-popup">
     <div id="moodular-help">
     <?php
     	$html = '<table class="form-table"><tbody>';
 		$args = array (
-			'post_type'              => 'moodular',
-			'post_parent'            => 0,
-			'pagination'             => false,
-			'posts_per_page'         => '999',
-			'orderby'                => 'menu_order',
+			'post_type'      => 'moodular_category',
 		);
-		$moodular = new WP_Query( $args );
+		
+		$moodulars = get_categories(array('taxonomy' => 'moodular_category'));
 		$moods = '<select id="s-moodular">';
-		if ( $moodular->have_posts() ) {
-			while ( $moodular->have_posts() ) {
-				$moodular->the_post();
-				$test = get_children(array('post_parent' => get_the_ID(), 'post_type' => 'moodular'));
-				$nb = count($test);
-				if( $nb )
-					$moods .= '<option value="'.get_the_ID().'">'.get_the_title().' ('.count($test).' images)</option>';
-			}
-		}
+		if ( !empty($moodulars) )
+			foreach ( $moodulars as $moodular )
+				$moods .= '<option value="'.$moodular->term_id.'">'.$moodular->name.' ('.$moodular->count.' images)</option>';
 		$moods .= '</select>';
 		wp_reset_postdata();
 
