@@ -2,17 +2,14 @@
 /**
  * Plugin Name: Moodular
  * Plugin URI: http://www.gougouzian.fr/projects/jquery/moodular/
- * Description: Moodular......
+ * Description: Easily create carousels with Moodular and integrate its in your posts
  * Version: 0.1
- * Author: Sylvain Gougouzian, Benjamin PONGY
+ * Author: Benjamin PONGY, Sylvain GOUGOUZIAN
  * Author URI: http://www.axome.com/
  * License: MIT
  */
 
-
-
 load_plugin_textdomain( 'moodular', false, basename( dirname( __FILE__ ) ) . '/languages' );
-
 
 if ( ! function_exists('moodular_cpt') ) {
 	// Register Custom Post Type
@@ -101,8 +98,6 @@ if ( ! function_exists( 'moodular_category' ) ) {
 
 }
 
-
-
 function add_moodular_button() {
 	
 	global $post;
@@ -115,8 +110,6 @@ function add_moodular_button() {
 	echo "<a title='{$title}' href='#TB_inline?width=640&height=500&inlineId={$popup_url}' class='thickbox button add_media' title='{$title}'><span class='dashicons dashicons-format-gallery' style='vertical-align: text-top; color: #888;'></span> $title</a>";
 }
 add_action('media_buttons', 'add_moodular_button', 11);
-
-
 
 function moodular_popup() {
 	require_once('moodular-popup.php');

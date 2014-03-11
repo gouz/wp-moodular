@@ -1,16 +1,15 @@
 <script>
-jQuery(document).ready(function() {
-    jQuery(".insert-moo").click(function() {
-    	var vitesse = parseFloat(jQuery('#vitesse').val().replace(',', '.')) * 1000;
-    	var aleatoire = jQuery('#moodular-random:checked').val();
-    	if( aleatoire==undefined )
-    		aleatoire = '';
-    	else { aleatoire = ' random="' + aleatoire + '"'; }
-    	var shortcode_moodular = '[slider id="'+jQuery('#s-moodular').val()+'" v="'+vitesse+'" transition="'+jQuery('#s-transition').val()+'" ctrl="'+jQuery('#s-ctrl').val()+'" aff="'+jQuery('#s-aff').val()+'" '+aleatoire+']';
-		var winmoo = window.dialogArguments || opener || parent || top;
-		winmoo.send_to_editor(shortcode_moodular);
-    });
-});
+(function($){
+	$(document).ready(function() {
+	    $(".insert-moo").click(function() {
+	    	var vitesse = parseFloat($('#vitesse').val().replace(',', '.')) * 1000,
+	    		aleatoire = (typeof $('#moodular-random:checked').val() == 'undefined' ? '' : ' random="' + aleatoire + '"',
+	    		shortcode_moodular = '[slider id="'+$('#s-moodular').val()+'" v="'+vitesse+'" transition="'+$('#s-transition').val()+'" ctrl="'+$('#s-ctrl').val()+'" aff="'+$('#s-aff').val()+'" '+aleatoire+']',
+				winmoo = window.dialogArguments || opener || parent || top;
+			winmoo.send_to_editor(shortcode_moodular);
+	    });
+	});
+})(window.jQuery)
 </script>
 <div style="display:none;" id="moodular-popup">
     <div id="moodular-help">

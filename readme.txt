@@ -1,7 +1,7 @@
 === Moodular ===
 Contributors: Gouz, Redpik
 Donate link: TODO
-Tags: slider, ........
+Tags: slider, carousel. gallery.......
 Requires at least: 3.8
 Tested up to: 3.8.1
 Stable tag: 0.1
