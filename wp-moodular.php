@@ -11,6 +11,29 @@
 
 load_plugin_textdomain( 'moodular', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
+$moodular_config = array(
+	'controls' => array(
+		1 => array(
+			'moodular' => 'buttons',
+			'label' => __('Arrows', 'moodular')
+		),
+		2 => array(
+			'moodular' => 'pagination',
+			'label' => __('Pagination', 'moodular')
+		)
+	),
+	'effects' => array(
+		1 => array(
+			'moodular' => 'fade',
+			'label' => __('Fading', 'moodular') 
+		),
+		2 => array(
+			'moodular' => 'left',
+			'label' => __('Left movement', 'moodular') 
+		)
+	)
+);
+
 if ( ! function_exists('moodular_cpt') ) {
 	// Register Custom Post Type
 	function moodular_cpt() {
@@ -121,3 +144,27 @@ function moodular_script() {
 	wp_enqueue_script( 'moodular', plugins_url('wp-moodular') . '/moodular.min.js', array( 'jquery' ), '4.3' );
 }
 add_action( 'wp_enqueue_scripts', 'moodular_script' );
+
+function moodular_shortcode( $atts ){
+	extract( shortcode_atts( array(
+		'id'         => -1,
+		'v'          => '500',
+		'transition' => 1,
+		'ctrl'       => 1,
+		'aff'        => 1,
+		'random'     => 0
+	), $atts ) );
+	
+	$moodular_id = 'moodular_' . uniqid();
+	
+	global $moodular_config;
+	
+	return '<script>(function($){
+		$(document).ready(function(){
+			$("#' . $moodular_id . '").moodular({
+				// @TODO
+			});
+		});
+	})(window.jQuery);';
+}
+add_shortcode( 'moodular', 'moodular_shortcode' );
