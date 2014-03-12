@@ -49,11 +49,10 @@
 		$html .= '</select><!-- <option value="3">Miniatures</option> --></td></tr>';
     	
     	$html .= '<tr valign="top"><th width="33%" scope="row">Afficher</th>';
-		$html .= '<td><select id="s-aff">
-			<option value="1">Image uniquement</option>
-			<option value="2">Image et titre</option>
-			<option value="3">Image, titre et texte</option>
-		</select></td></tr>';
+		$html .= '<td><select id="s-aff">';
+		foreach ($moodular_config['display'] as $k => $v)
+			$html .= '<option value="' . $k . '">' . $v['label'] . '</option>';
+		$html .= '</select></td></tr>';
     	
     	$html .= '<tr valign="top"><th width="33%" scope="row">Ordre</th>';
 		$html .= '<td><label for="moodular-random"><input type="checkbox" value="1" id="moodular-random" name="moodular-random"> aléatoire</label></td></tr>';

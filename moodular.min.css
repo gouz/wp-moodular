@@ -1,2 +1,2 @@
-.wp-moodular { overflow: hidden; }
-.wp-moodular, .wp-moodular li { margin: 0; padding: 0; list-style: none; width: 100%; }
+.moodular-wrapper { overflow: hidden; }
+.moodular-wrapper, .moodular-wrapper li { margin: 0; padding: 0; list-style: none; width: 100%; }

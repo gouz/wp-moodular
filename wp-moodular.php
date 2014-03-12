@@ -31,6 +31,20 @@ $moodular_config = array(
 			'moodular' => 'left',
 			'label' => __('Left movement', 'moodular') 
 		)
+	),
+	'display' => array(
+		1 => array(
+			'moodular' => 'moodular-images',
+			'label' => __('Just images', 'moodular')
+		),
+		2 => array(
+			'moodular' => 'moodular-images_title',
+			'label' => __('Images + Titles', 'moodular')
+		),
+		3 => array(
+			'moodular' => 'moodular-full',
+			'label' => __('Full', 'moodular')
+		)
 	)
 );
 
@@ -159,12 +173,56 @@ function moodular_shortcode( $atts ){
 	
 	global $moodular_config;
 	
-	return '<script>(function($){
-		$(document).ready(function(){
-			$("#' . $moodular_id . '").moodular({
-				// @TODO
+	$elements = '';
+	$myposts = get_posts( array(
+		'post_type' => 'moodular',
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'moodular_category',
+				'field' => 'id',
+				'terms' => $id
+			)
+		) 
+	) ); 
+	foreach ( $myposts as $post ) : 
+		$elements .= '<li>' . $post->post_title . '</li>'; 
+	endforeach; 
+	wp_reset_postdata();
+	
+	$controls = '';
+	switch ($moodular_config['controls'][$ctrl]['moodular'])
+	{
+		default: break;
+		case 'buttons':
+			$controls = '<a class="moodular-btnLeft"></a><a class="moodular-btnRight"></a>';
+			break;
+		case 'pagination':
+			$controls = '<ul class="moodular-pagination"></ul>';
+			break;
+	}
+	
+	return '
+	<div id="' . $moodular_id . '" class="' . $moodular_config['display'][$aff]['moodular'] . '">
+		<ul class="moodular-wrapper">
+			' . $elements . '
+		</ul>
+		' . $controls . '
+	</div>
+	<script>
+		(function($){
+			$(document).ready(function(){
+				var $moodular = $("#' . $moodular_id . '");
+				$(".moodular-wrapper", $moodular).moodular({
+					effects: "' . $moodular_config['effects'][$transition]['moodular'] . '",
+					controls: "' . $moodular_config['controls'][$ctrl]['moodular'] . '",
+					v: ' . (int) $v . ',
+					btnLeft: $(".moodular-btnLeft", $moodular),
+					btnRight: $(".moodular-btnLeft", $moodular),
+					pagination: $(".moodular-pagination", $moodular),
+					resize: 1
+				});
 			});
-		});
-	})(window.jQuery);';
+		})(window.jQuery);
+	</script>';
 }
 add_shortcode( 'moodular', 'moodular_shortcode' );
