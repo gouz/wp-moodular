@@ -168,7 +168,11 @@ function moodular_shortcode( $atts ){
 		'aff'        => 1,
 		'random'     => 0
 	), $atts ) );
-	
+	return moodular($id, $v, $transition, $ctrl, $aff, $random);
+}
+add_shortcode( 'moodular', 'moodular_shortcode' );
+
+function moodular($id, $v = 500, $transition = 1, $ctrl = 1, $aff = 1, $random = 0) {
 	$moodular_id = 'moodular_' . uniqid();
 	
 	global $moodular_config;
@@ -224,5 +228,5 @@ function moodular_shortcode( $atts ){
 			});
 		})(window.jQuery);
 	</script>';
-}
-add_shortcode( 'moodular', 'moodular_shortcode' );
+} 
+
