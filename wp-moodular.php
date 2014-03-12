@@ -30,6 +30,10 @@ $moodular_config = array(
 		2 => array(
 			'moodular' => 'left',
 			'label' => __('Left movement', 'moodular') 
+		),
+		3 => array(
+			'moodular' => 'top',
+			'label' => __('Top movement', 'moodular') 
 		)
 	),
 	'display' => array(
