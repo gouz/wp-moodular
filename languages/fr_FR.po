@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Moodular\n"
-"POT-Creation-Date: 2014-03-07 09:31+0100\n"
-"PO-Revision-Date: 2014-03-07 09:31+0100\n"
+"POT-Creation-Date: 2014-03-26 14:29+0100\n"
+"PO-Revision-Date: 2014-03-26 14:32+0100\n"
 "Last-Translator: Ben <benjamin.pongy@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,106 +15,146 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: wp-moodular.php:23
-msgid "Moodular"
+#: wp-moodular.php:18
+msgid "Arrows"
 msgstr ""
 
-#: wp-moodular.php:24
-msgid "Parent Item:"
-msgstr ""
-
-#: wp-moodular.php:25
-msgid "All Items"
-msgstr ""
-
-#: wp-moodular.php:26
-msgid "View Item"
-msgstr ""
-
-#: wp-moodular.php:27
-msgid "Add New Item"
+#: wp-moodular.php:22
+msgid "Pagination"
 msgstr ""
 
 #: wp-moodular.php:28
-msgid "Add New"
+msgid "Fading"
 msgstr ""
 
-#: wp-moodular.php:29
+#: wp-moodular.php:32
+msgid "Left movement"
+msgstr ""
+
+#: wp-moodular.php:36
+msgid "Top movement"
+msgstr ""
+
+#: wp-moodular.php:42
+msgid "Just images"
+msgstr ""
+
+#: wp-moodular.php:46
+msgid "Images + Titles"
+msgstr ""
+
+#: wp-moodular.php:50
+msgid "Full"
+msgstr ""
+
+#: wp-moodular.php:61
+msgid "Moodular"
+msgstr "Moodular"
+
+#: wp-moodular.php:62
+msgid "Parent Item:"
+msgstr ""
+
+#: wp-moodular.php:63
+msgid "All Items"
+msgstr "Tous les éléments"
+
+#: wp-moodular.php:64
+msgid "View Item"
+msgstr "Voir élément"
+
+#: wp-moodular.php:65
+msgid "Add New Item"
+msgstr ""
+
+#: wp-moodular.php:66
+msgid "Add New"
+msgstr "Ajouter"
+
+#: wp-moodular.php:67
 msgid "Edit Item"
 msgstr "Éditer"
 
-#: wp-moodular.php:30
+#: wp-moodular.php:68
 msgid "Update Item"
 msgstr "Mettre à jour"
 
-#: wp-moodular.php:31
+#: wp-moodular.php:69
 msgid "Search Item"
 msgstr "Rechercher"
 
-#: wp-moodular.php:32
+#: wp-moodular.php:70
 msgid "Not found"
 msgstr "Non trouvé"
 
-#: wp-moodular.php:33
+#: wp-moodular.php:71
 msgid "Not found in Trash"
 msgstr "Non trouvé dans la corbeille"
 
-#: wp-moodular.php:36
+#: wp-moodular.php:74
 msgid "moodular"
 msgstr ""
 
-#: wp-moodular.php:37
+#: wp-moodular.php:75
 msgid "Moodular description"
 msgstr ""
 
-#: wp-moodular.php:71
+#: wp-moodular.php:109
 msgid "Slides"
-msgstr ""
+msgstr "Slides"
 
-#: wp-moodular.php:72
+#: wp-moodular.php:110
 msgid "All slides"
-msgstr ""
+msgstr "Tous les slides"
 
-#: wp-moodular.php:73
+#: wp-moodular.php:111
 msgid "Parent slide"
 msgstr ""
 
-#: wp-moodular.php:74
+#: wp-moodular.php:112
 msgid "Parent slide:"
 msgstr ""
 
-#: wp-moodular.php:75
+#: wp-moodular.php:113
 msgid "New slide Name"
 msgstr ""
 
-#: wp-moodular.php:76
+#: wp-moodular.php:114
 msgid "Add new slide"
 msgstr ""
 
-#: wp-moodular.php:77
+#: wp-moodular.php:115
 msgid "Edit slide"
 msgstr ""
 
-#: wp-moodular.php:78
+#: wp-moodular.php:116
 msgid "Update slide"
 msgstr ""
 
-#: wp-moodular.php:79
+#: wp-moodular.php:117
 msgid "Separate slides with commas"
 msgstr ""
 
-#: wp-moodular.php:80
+#: wp-moodular.php:118
 msgid "Search slides"
 msgstr ""
 
-#: wp-moodular.php:81
+#: wp-moodular.php:119
 msgid "Add or remove slides"
 msgstr ""
 
-#: wp-moodular.php:82
+#: wp-moodular.php:120
 msgid "Choose from the most used slides"
 msgstr ""
 
-#: wp-moodular.php:83
+#: wp-moodular.php:121
 msgid "Not Found"
+msgstr ""
+
+#: wp-moodular.php:148
+msgid "moodular-popup"
+msgstr ""
+
+#: wp-moodular.php:149
+msgid "Insert slider"
 msgstr ""
