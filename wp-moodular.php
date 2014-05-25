@@ -158,8 +158,8 @@ function moodular_popup() {
 add_action('admin_footer', 'moodular_popup');
 
 function moodular_script() {
-	wp_enqueue_style( 'moodular', plugins_url('wp-moodular') . '/moodular.min.css', array(), '4.3' );
-	wp_enqueue_script( 'moodular', plugins_url('wp-moodular') . '/moodular.min.js', array( 'jquery' ), '4.3' );
+	wp_enqueue_style( 'moodular', plugins_url('wp-moodular') . '/moodular.min.css', array(), '4.5' );
+	wp_enqueue_script( 'moodular', plugins_url('wp-moodular') . '/moodular.min.js', array( 'jquery' ), '4.5' );
 }
 add_action( 'wp_enqueue_scripts', 'moodular_script' );
 
@@ -193,7 +193,7 @@ function moodular($id, $v = 500, $transition = 1, $ctrl = 1, $aff = 1, $random =
 		) 
 	) ); 
 	foreach ( $myposts as $post ) : 
-		$elements .= '<li>' . $post->post_title . '</li>'; 
+		$elements .= '<li>' .  get_the_post_thumbnail( $post->ID, 'full') . '<span class="moodular-title">' . $post->post_title . '</span><div class="moodular-description">' . $post->post_content . '</div></li>'; 
 	endforeach; 
 	wp_reset_postdata();
 	
@@ -223,11 +223,12 @@ function moodular($id, $v = 500, $transition = 1, $ctrl = 1, $aff = 1, $random =
 				$(".moodular-wrapper", $moodular).moodular({
 					effects: "' . $moodular_config['effects'][$transition]['moodular'] . '",
 					controls: "' . $moodular_config['controls'][$ctrl]['moodular'] . '",
-					v: ' . (int) $v . ',
-					btnLeft: $(".moodular-btnLeft", $moodular),
-					btnRight: $(".moodular-btnLeft", $moodular),
+					timer: ' . (int) $v . ',
+					buttonPrev: $(".moodular-btnLeft", $moodular),
+					buttonNext: $(".moodular-btnLeft", $moodular),
 					pagination: $(".moodular-pagination", $moodular),
-					resize: 1
+					resize: 1,
+					calcHeight: true
 				});
 			});
 		})(window.jQuery);

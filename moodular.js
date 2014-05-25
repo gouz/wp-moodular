@@ -7,7 +7,7 @@
 (function($) {
 	'use strict';
 	var Moodular = function(content, opts, ctrls, fxs) {
-		this.version = '4.4';
+		this.version = '4.5';
 		this.opts = opts;
 		this.ctrls = ctrls;
 		this.fxs = fxs;
@@ -16,9 +16,16 @@
 	};
 	Moodular.prototype = {
 		init : function() {
+			var that = this;
 			this.current = 0;
 			this.next = -1;
 			this.items = $('>' + this.opts.selector, this.$element);
+			if (this.opts.calcHeight)
+				$('>img', this.items.eq(0)).eq(0).on('load', function() {
+					var h = $(this).height();
+					that.$element.height(h);
+					that.items.height(h);
+				});
 			this.nbItems = this.items.length;
 			this.$element.css('position', 'relative');
 			this.items.css({
@@ -26,7 +33,6 @@
 				top : 0,
 				left : 0
 			});
-			var that = this;
 			this.$element.on('moodular.prev', function() {
 				if (that.next == -1) {
 					that.next = that.current - that.opts.step;
@@ -99,7 +105,8 @@
 		controls : '',
 		easing : '',
 		selector : 'li',
-		queue : false
+		queue : false,
+		calcHeight: false
 	};
 	$.fn.moodular.controls = {};
 	$.fn.moodular.effects = {};
