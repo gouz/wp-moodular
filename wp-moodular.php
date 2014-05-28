@@ -2,11 +2,24 @@
 /**
  * Plugin Name: Moodular
  * Plugin URI: http://www.gougouzian.fr/projects/jquery/moodular/
- * Description: Easily create carousels with Moodular and integrate its in your posts
- * Version: 0.1
- * Author: Benjamin PONGY, Sylvain GOUGOUZIAN
+ * Description: Easily create carousels with Moodular and integrate them in your posts
+ * Version: 0.2
+ * Author: Benjamin PONGY, Sylvain GOUGOUZIAN, Nicolas SOROSAC
  * Author URI: http://www.axome.com/
+ * Text Domain: moodular
+ * Domain Path: /languages/
  * License: MIT
+ * 
+ * ============================
+ * Filter items HTML attributes
+ * ============================
+ * 
+ * add_filter('moodular_item_attributes', function($attributes, $post){
+ * 	$bgcolor = get_post_meta($post->ID, '_bgcolor', true);
+ * 	if ($bgcolor) $attributes['style'] = "background-color:{$bgcolor}";
+ * 	return $attributes;
+ * }, 10, 2);
+ * 
  */
 
 load_plugin_textdomain( 'moodular', false, basename( dirname( __FILE__ ) ) . '/languages' );
@@ -77,7 +90,7 @@ if ( ! function_exists('moodular_cpt') ) {
 			'supports'            => array( 'title', 'editor', 'author', 'thumbnail', 'page-attributes', ),
 			'taxonomies'          => array( 'moodular_category' ),
 			'hierarchical'        => false,
-			'public'              => true,
+			'public'              => false,
 			'show_ui'             => true,
 			'show_in_menu'        => true,
 			'show_in_nav_menus'   => true,
@@ -85,9 +98,9 @@ if ( ! function_exists('moodular_cpt') ) {
 			'menu_position'       => 5,
 			'menu_icon'           => 'dashicons-format-gallery',
 			'can_export'          => true,
-			'has_archive'         => true,
+			'has_archive'         => false,
 			'exclude_from_search' => true,
-			'publicly_queryable'  => true,
+			'publicly_queryable'  => false,
 			'rewrite'             => false,
 			'capability_type'     => 'post',
 		);
@@ -123,20 +136,18 @@ if ( ! function_exists( 'moodular_category' ) ) {
 		$args = array(
 			'labels'                     => $labels,
 			'hierarchical'               => false,
-			'public'                     => true,
+			'public'                     => false,
 			'show_ui'                    => true,
 			'show_admin_column'          => true,
 			'show_in_nav_menus'          => false,
-			'show_tagcloud'              => true,
+			'show_tagcloud'              => false,
 			'rewrite'                    => false
 		);
 		register_taxonomy( 'moodular_category', 'moodular', $args );
-	
 	}
 	
 	// Hook into the 'init' action
 	add_action( 'init', 'moodular_category', 0 );
-
 }
 
 function add_moodular_button() {
@@ -176,13 +187,14 @@ function moodular_shortcode( $atts ){
 }
 add_shortcode( 'moodular', 'moodular_shortcode' );
 
-function moodular($id, $v = 500, $transition = 1, $ctrl = 1, $aff = 1, $random = 0) {
-	$moodular_id = 'moodular_' . uniqid();
+function moodular($id, $v = 5000, $transition = 1, $ctrl = 1, $aff = 1, $random = 0) {
 	
 	global $moodular_config;
 	
 	$elements = '';
-	$myposts = get_posts( array(
+	$moodular_id = 'moodular_' . uniqid();
+	
+	$myposts = get_posts(array(
 		'post_type' => 'moodular',
 		'tax_query' => array(
 			array(
@@ -191,15 +203,42 @@ function moodular($id, $v = 500, $transition = 1, $ctrl = 1, $aff = 1, $random =
 				'terms' => $id
 			)
 		) 
-	) ); 
-	foreach ( $myposts as $post ) : 
-		$elements .= '<li>' .  get_the_post_thumbnail( $post->ID, 'full') . '<span class="moodular-title">' . $post->post_title . '</span><div class="moodular-description">' . $post->post_content . '</div></li>'; 
-	endforeach; 
+	));
+	
+	foreach ($myposts as $post) {
+		
+		$attributes = array();
+		$attributes = apply_filters('moodular_item_attributes', $attributes, $post);
+		$attributes_string = '';
+		if (is_array($attributes))
+			foreach ($attributes as $attribute_key => $attribute_value)
+				$attributes_string .= ' '.$attribute_key.'="'.esc_attr($attribute_value).'"';
+		
+		$elements .= '<li'.$attributes_string.'>';
+		
+		switch ($moodular_config['display'][$aff]['moodular']) {
+			default:
+			case 'moodular-images':
+				$elements .= get_the_post_thumbnail($post->ID, 'full');
+				break;
+			case 'moodular-images_title':
+				$elements .= get_the_post_thumbnail($post->ID, 'full');
+				$elements .= '<span class="moodular-title">' . $post->post_title . '</span>';
+				break;
+			case 'moodular-full':
+				$elements .= get_the_post_thumbnail($post->ID, 'full');
+				$elements .= '<span class="moodular-title">' . $post->post_title . '</span>';
+				$elements .= '<div class="moodular-description">' . $post->post_content . '</div>';
+				break;
+		}
+		
+		$elements .= '</li>';
+	}
+	
 	wp_reset_postdata();
 	
 	$controls = '';
-	switch ($moodular_config['controls'][$ctrl]['moodular'])
-	{
+	switch ($moodular_config['controls'][$ctrl]['moodular']) {
 		default: break;
 		case 'buttons':
 			$controls = '<a class="moodular-btnLeft"></a><a class="moodular-btnRight"></a>';
@@ -211,9 +250,7 @@ function moodular($id, $v = 500, $transition = 1, $ctrl = 1, $aff = 1, $random =
 	
 	return '
 	<div id="' . $moodular_id . '" class="' . $moodular_config['display'][$aff]['moodular'] . '">
-		<ul class="moodular-wrapper">
-			' . $elements . '
-		</ul>
+		<ul class="moodular-wrapper">' . $elements . '</ul>
 		' . $controls . '
 	</div>
 	<script>
@@ -221,11 +258,12 @@ function moodular($id, $v = 500, $transition = 1, $ctrl = 1, $aff = 1, $random =
 			$(document).ready(function(){
 				var $moodular = $("#' . $moodular_id . '");
 				$(".moodular-wrapper", $moodular).moodular({
-					effects: "' . $moodular_config['effects'][$transition]['moodular'] . '",
-					controls: "' . $moodular_config['controls'][$ctrl]['moodular'] . '",
-					timer: ' . (int) $v . ',
+					effects:    "' . $moodular_config['effects'][$transition]['moodular'] . '",
+					controls:   "' . $moodular_config['controls'][$ctrl]['moodular'] . '",
+					speed:      500,
+					timer:		' . (int) $v . ',
 					buttonPrev: $(".moodular-btnLeft", $moodular),
-					buttonNext: $(".moodular-btnLeft", $moodular),
+					buttonNext: $(".moodular-btnRight", $moodular),
 					pagination: $(".moodular-pagination", $moodular),
 					resize: 1,
 					calcHeight: true
@@ -233,5 +271,4 @@ function moodular($id, $v = 500, $transition = 1, $ctrl = 1, $aff = 1, $random =
 			});
 		})(window.jQuery);
 	</script>';
-} 
-
+}
