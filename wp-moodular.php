@@ -153,7 +153,7 @@ if ( ! function_exists( 'moodular_category' ) ) {
 function add_moodular_button() {
 	
 	global $post;
-	if( $post->post_type=='moodular' )
+	if (!$post || $post->post_type == 'moodular')
 		return;
 	
 	$popup_url = __( 'moodular-popup', 'moodular' );
