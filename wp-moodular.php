@@ -3,7 +3,7 @@
  * Plugin Name: Moodular
  * Plugin URI: http://www.gougouzian.fr/projects/jquery/moodular/
  * Description: Easily create carousels with Moodular and integrate them in your posts
- * Version: 0.2
+ * Version: 0.3
  * Author: Benjamin PONGY, Sylvain GOUGOUZIAN, Nicolas SOROSAC
  * Author URI: http://www.axome.com/
  * Text Domain: moodular
@@ -14,7 +14,7 @@
  * Filter items HTML attributes
  * ============================
  * 
- * add_filter('moodular_item_attributes', function($attributes, $post){
+ * add_filter('moodular_item_attributes', function($attributes, $post) {
  * 	$bgcolor = get_post_meta($post->ID, '_bgcolor', true);
  * 	if ($bgcolor) $attributes['style'] = "background-color:{$bgcolor}";
  * 	return $attributes;
@@ -22,7 +22,7 @@
  * 
  */
 
-load_plugin_textdomain( 'moodular', false, basename( dirname( __FILE__ ) ) . '/languages' );
+load_plugin_textdomain('moodular', false, basename(dirname(__FILE__)) . '/languages');
 
 $moodular_config = array(
 	'controls' => array(
@@ -65,30 +65,30 @@ $moodular_config = array(
 	)
 );
 
-if ( ! function_exists('moodular_cpt') ) {
+if (! function_exists('moodular_cpt')) {
 	// Register Custom Post Type
 	function moodular_cpt() {
 		$labels = array(
-			'name'                => _x( 'Items', 'Post Type General Name', 'moodular' ),
-			'singular_name'       => _x( 'Item', 'Post Type Singular Name', 'moodular' ),
-			'menu_name'           => __( 'Moodular', 'moodular' ),
-			'parent_item_colon'   => __( 'Parent Item:', 'moodular' ),
-			'all_items'           => __( 'All Items', 'moodular' ),
-			'view_item'           => __( 'View Item', 'moodular' ),
-			'add_new_item'        => __( 'Add New Item', 'moodular' ),
-			'add_new'             => __( 'Add New', 'moodular' ),
-			'edit_item'           => __( 'Edit Item', 'moodular' ),
-			'update_item'         => __( 'Update Item', 'moodular' ),
-			'search_items'        => __( 'Search Item', 'moodular' ),
-			'not_found'           => __( 'Not found', 'moodular' ),
-			'not_found_in_trash'  => __( 'Not found in Trash', 'moodular' ),
+			'name'                => _x('Items', 'Post Type General Name', 'moodular'),
+			'singular_name'       => _x('Item', 'Post Type Singular Name', 'moodular'),
+			'menu_name'           => __('Moodular', 'moodular'),
+			'parent_item_colon'   => __('Parent Item:', 'moodular'),
+			'all_items'           => __('All Items', 'moodular'),
+			'view_item'           => __('View Item', 'moodular'),
+			'add_new_item'        => __('Add New Item', 'moodular'),
+			'add_new'             => __('Add New', 'moodular'),
+			'edit_item'           => __('Edit Item', 'moodular'),
+			'update_item'         => __('Update Item', 'moodular'),
+			'search_items'        => __('Search Item', 'moodular'),
+			'not_found'           => __('Not found', 'moodular'),
+			'not_found_in_trash'  => __('Not found in Trash', 'moodular'),
 		);
 		$args = array(
-			'label'               => __( 'moodular', 'moodular' ),
-			'description'         => __( 'Moodular description', 'moodular' ),
+			'label'               => __('moodular', 'moodular'),
+			'description'         => __('Moodular description', 'moodular'),
 			'labels'              => $labels,
-			'supports'            => array( 'title', 'editor', 'author', 'thumbnail', 'page-attributes', ),
-			'taxonomies'          => array( 'moodular_category' ),
+			'supports'            => array('title', 'editor', 'author', 'thumbnail', 'page-attributes',),
+			'taxonomies'          => array('moodular_category'),
 			'hierarchical'        => false,
 			'public'              => false,
 			'show_ui'             => true,
@@ -104,34 +104,34 @@ if ( ! function_exists('moodular_cpt') ) {
 			'rewrite'             => false,
 			'capability_type'     => 'post',
 		);
-		register_post_type( 'moodular', $args );
+		register_post_type('moodular', $args);
 	}
 	// Hook into the 'init' action
-	add_action( 'init', 'moodular_cpt', 0 );
+	add_action('init', 'moodular_cpt', 0);
 }
 
 
-if ( ! function_exists( 'moodular_category' ) ) {
+if (! function_exists('moodular_category')) {
 	
 	// Register Custom Taxonomy
 	function moodular_category() {
 	
 		$labels = array(
-			'name'                       => _x( 'Moodular sliders', 'Taxonomy General Name', 'moodular' ),
-			'singular_name'              => _x( 'Moodular category', 'Taxonomy Singular Name', 'moodular' ),
-			'menu_name'                  => __( 'Slides', 'moodular' ),
-			'all_items'                  => __( 'All slides', 'moodular' ),
-			'parent_item'                => __( 'Parent slide', 'moodular' ),
-			'parent_item_colon'          => __( 'Parent slide:', 'moodular' ),
-			'new_item_name'              => __( 'New slide Name', 'moodular' ),
-			'add_new_item'               => __( 'Add new slide', 'moodular' ),
-			'edit_item'                  => __( 'Edit slide', 'moodular' ),
-			'update_item'                => __( 'Update slide', 'moodular' ),
-			'separate_items_with_commas' => __( 'Separate slides with commas', 'moodular' ),
-			'search_items'               => __( 'Search slides', 'moodular' ),
-			'add_or_remove_items'        => __( 'Add or remove slides', 'moodular' ),
-			'choose_from_most_used'      => __( 'Choose from the most used slides', 'moodular' ),
-			'not_found'                  => __( 'Not Found', 'moodular' )
+			'name'                       => _x('Moodular sliders', 'Taxonomy General Name', 'moodular'),
+			'singular_name'              => _x('Moodular category', 'Taxonomy Singular Name', 'moodular'),
+			'menu_name'                  => __('Slides', 'moodular'),
+			'all_items'                  => __('All slides', 'moodular'),
+			'parent_item'                => __('Parent slide', 'moodular'),
+			'parent_item_colon'          => __('Parent slide:', 'moodular'),
+			'new_item_name'              => __('New slide Name', 'moodular'),
+			'add_new_item'               => __('Add new slide', 'moodular'),
+			'edit_item'                  => __('Edit slide', 'moodular'),
+			'update_item'                => __('Update slide', 'moodular'),
+			'separate_items_with_commas' => __('Separate slides with commas', 'moodular'),
+			'search_items'               => __('Search slides', 'moodular'),
+			'add_or_remove_items'        => __('Add or remove slides', 'moodular'),
+			'choose_from_most_used'      => __('Choose from the most used slides', 'moodular'),
+			'not_found'                  => __('Not Found', 'moodular')
 		);
 		$args = array(
 			'labels'                     => $labels,
@@ -143,21 +143,21 @@ if ( ! function_exists( 'moodular_category' ) ) {
 			'show_tagcloud'              => false,
 			'rewrite'                    => false
 		);
-		register_taxonomy( 'moodular_category', 'moodular', $args );
+		register_taxonomy('moodular_category', 'moodular', $args);
 	}
 	
 	// Hook into the 'init' action
-	add_action( 'init', 'moodular_category', 0 );
+	add_action('init', 'moodular_category', 0);
 }
 
 function add_moodular_button() {
-	
+
 	global $post;
 	if (!$post || $post->post_type == 'moodular')
 		return;
-	
-	$popup_url = __( 'moodular-popup', 'moodular' );
-	$title = __( 'Insert slider', 'moodular' );
+
+	$popup_url = __('moodular-popup', 'moodular');
+	$title = __('Insert slider', 'moodular');
 
 	echo "<a title='{$title}' href='#TB_inline?width=640&height=500&inlineId={$popup_url}' class='thickbox button add_media' title='{$title}'><span class='dashicons dashicons-format-gallery' style='vertical-align: text-top; color: #888;'></span> $title</a>";
 }
@@ -169,23 +169,30 @@ function moodular_popup() {
 add_action('admin_footer', 'moodular_popup');
 
 function moodular_script() {
-	wp_enqueue_style( 'moodular', plugins_url('wp-moodular') . '/moodular.min.css', array(), '4.5' );
-	wp_enqueue_script( 'moodular', plugins_url('wp-moodular') . '/moodular.min.js', array( 'jquery' ), '4.5' );
-}
-add_action( 'wp_enqueue_scripts', 'moodular_script' );
 
-function moodular_shortcode( $atts ){
-	extract( shortcode_atts( array(
+	global $post;
+
+	// Only load the assets when necessary
+	if (!$post || !($post instanceof WP_Post) || strpos($post->post_content, '[moodular') === false)
+		return;
+
+	wp_enqueue_style('moodular', plugins_url('wp-moodular') . '/moodular.min.css', array(), '4.5');
+	wp_enqueue_script('moodular', plugins_url('wp-moodular') . '/moodular.min.js', array('jquery'), '4.5');
+}
+add_action('wp_enqueue_scripts', 'moodular_script');
+
+function moodular_shortcode($atts) {
+	extract(shortcode_atts(array(
 		'id'         => -1,
 		'v'          => '500',
 		'transition' => 1,
 		'ctrl'       => 1,
 		'aff'        => 1,
 		'random'     => 0
-	), $atts ) );
+	), $atts));
 	return moodular($id, $v, $transition, $ctrl, $aff, $random);
 }
-add_shortcode( 'moodular', 'moodular_shortcode' );
+add_shortcode('moodular', 'moodular_shortcode');
 
 function moodular($id, $v = 5000, $transition = 1, $ctrl = 1, $aff = 1, $random = 0) {
 	
@@ -254,7 +261,7 @@ function moodular($id, $v = 5000, $transition = 1, $ctrl = 1, $aff = 1, $random 
 		' . $controls . '
 	</div>
 	<script>
-		(function($){
+		(function($) {
 			$(document).ready(function(){
 				var $moodular = $("#' . $moodular_id . '");
 				$(".moodular-wrapper", $moodular).moodular({
