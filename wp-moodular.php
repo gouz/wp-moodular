@@ -173,7 +173,7 @@ function moodular_script() {
 	global $post;
 
 	// Only load the assets when necessary
-	if (!$post || !($post instanceof WP_Post) || strpos($post->post_content, '[moodular') === false)
+	if (!$post || !($post instanceof WP_Post) || strpos($post->post_content, '[moodular') === false)
 		return;
 
 	wp_enqueue_style('moodular', plugins_url('wp-moodular') . '/moodular.min.css', array(), '4.5');
