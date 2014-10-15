@@ -260,7 +260,7 @@ function moodular($id, $v = 5000, $transition = 1, $ctrl = 1, $aff = 1, $random 
 	}
 	
 	return '
-	<div id="' . $moodular_id . '" class="' . $moodular_config['display'][$aff]['moodular'] . '">
+	<div id="' . $moodular_id . '" class="moodular ' . $moodular_config['display'][$aff]['moodular'] . '">
 		<ul class="moodular-wrapper">' . $elements . '</ul>
 		' . $controls . '
 	</div>
