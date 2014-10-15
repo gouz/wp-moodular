@@ -200,9 +200,13 @@ function moodular($id, $v = 5000, $transition = 1, $ctrl = 1, $aff = 1, $random 
 	
 	$elements = '';
 	$moodular_id = 'moodular_' . uniqid();
+
+	$ordre = $random ? 'rand' : 'menu_order';
 	
 	$myposts = get_posts(array(
 		'post_type' => 'moodular',
+		'orderby' => $ordre,
+		'order' => 'ASC',
 		'tax_query' => array(
 			array(
 				'taxonomy' => 'moodular_category',
@@ -211,7 +215,7 @@ function moodular($id, $v = 5000, $transition = 1, $ctrl = 1, $aff = 1, $random 
 			)
 		) 
 	));
-	
+
 	foreach ($myposts as $post) {
 		
 		$attributes = array();
