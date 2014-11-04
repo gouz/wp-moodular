@@ -23,11 +23,13 @@ class Moodular
       add_shortcode('moodular', array($this, 'shortCode'));
   }
 
-  private function _add($type, $code, $label)
+  private function _add($type, $code, $label, $function = null, $js = null)
   {
     $this->{'_' . $type}[$code] = array(
       'moodular' => $code,
-      'label' => $label
+      'label' => $label,
+      'function' => $function,
+      'js' => $js
     );
     return $this;
   }
@@ -44,14 +46,14 @@ class Moodular
     return $this->_add('effects', $code, $label);
   }
 
-  public function addControl($code, $label)
+  public function addControl($code, $label, $function, $js)
   {
-    return $this->_add('controls', $code, $label);
+    return $this->_add('controls', $code, $label, $function, $js);
   }
 
-  public function addDisplay($code, $label)
+  public function addDisplay($code, $label, $function)
   {
-    return $this->_add('displays', $code, $label);
+    return $this->_add('displays', $code, $label, $function);
   }
 
   public function script()
@@ -122,39 +124,13 @@ class Moodular
       if (is_array($attributes))
         foreach ($attributes as $attribute_key => $attribute_value)
           $attributes_string .= ' ' . $attribute_key . '="' . esc_attr($attribute_value) . '"';
-      $elements .= '<li'.$attributes_string.'>';
-      switch ($aff) {
-        default:
-        case 'moodular-images':
-          $elements .= get_the_post_thumbnail($post->ID, 'full');
-          break;
-        case 'moodular-images_title':
-          $elements .= get_the_post_thumbnail($post->ID, 'full');
-          $elements .= '<span class="moodular-title">' . $post->post_title . '</span>';
-          break;
-        case 'moodular-full':
-          $elements .= get_the_post_thumbnail($post->ID, 'full');
-          $elements .= '<span class="moodular-title">' . $post->post_title . '</span>';
-          $elements .= '<div class="moodular-description">' . $post->post_content . '</div>';
-          break;
-      }
-      $elements .= '</li>';
+      $elements .= '<li'.$attributes_string.'>' . $this->_displays[$aff]['function']($post) . '</li>';
     }
     wp_reset_postdata();
-    $controls = '';
-    switch ($ctrl) {
-      default: break;
-      case 'buttons':
-        $controls = '<a class="moodular-btnLeft"></a><a class="moodular-btnRight"></a>';
-        break;
-      case 'pagination':
-        $controls = '<ul class="moodular-pagination"></ul>';
-        break;
-    }
     return '
       <div id="' . $moodular_id . '" class="moodular ' . $aff . '">
         <ul class="moodular-wrapper">' . $elements . '</ul>
-        ' . $controls . '
+        ' . $this->_controls[$ctrl]['function'] . '
       </div>
       <script>
         (function($) {
@@ -165,9 +141,7 @@ class Moodular
               controls: "' . $ctrl . '",
               speed: 500,
               timer: ' . (int) $v . ',
-              buttonPrev : $(".moodular-btnLeft", $moodular),
-              buttonNext: $(".moodular-btnRight", $moodular),
-              pagination: $(".moodular-pagination", $moodular),
+              ' . trim($this->_controls[$ctrl]['js'], ',') . ',
               calcHeight: true
             });
           });
