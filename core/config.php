@@ -11,14 +11,14 @@ Moodular::getInstance()
     '<ul class="moodular-pagination"></ul>',
     'pagination: $(".moodular-pagination", $moodular)'
   )
-  ->addDisplay('moodular-images', __('Just images', 'moodular'), function($p) {
+  ->addDisplay('images', __('Just images', 'moodular'), function($p) {
     return get_the_post_thumbnail($p->ID, 'full');
   })
-  ->addDisplay('moodular-images_title', __('Images + Titles', 'moodular'), function($p) {
+  ->addDisplay('images_title', __('Images + Titles', 'moodular'), function($p) {
     return get_the_post_thumbnail($p->ID, 'full')
       . '<span class="moodular-title">' . $p->post_title . '</span>';
   })
-  ->addDisplay('moodular-full', __('Full', 'moodular'), function($p) {
+  ->addDisplay('full', __('Full', 'moodular'), function($p) {
     return get_the_post_thumbnail($p->ID, 'full')
       . '<span class="moodular-title">' . $p->post_title . '</span>'
       . '<div class="moodular-description">' . $p->post_content . '</div>';
