@@ -28,8 +28,8 @@ class Moodular
     $this->{'_' . $type}[$code] = array(
       'moodular' => $code,
       'label' => $label,
-      'function' => $function,
-      'js' => $js
+      'function' => $function == null ? function($p) {} : $function,
+      'js' => $js == null ? '' : $js
     );
     return $this;
   }
@@ -51,7 +51,7 @@ class Moodular
     return $this->_add('controls', $code, $label, $function, $js);
   }
 
-  public function addDisplay($code, $label, $function)
+  public function addDisplay($code, $label, $function = null)
   {
     return $this->_add('displays', $code, $label, $function);
   }
@@ -124,7 +124,8 @@ class Moodular
       if (is_array($attributes))
         foreach ($attributes as $attribute_key => $attribute_value)
           $attributes_string .= ' ' . $attribute_key . '="' . esc_attr($attribute_value) . '"';
-      $elements .= '<li'.$attributes_string.'>' . $this->_displays[$aff]['function']($post) . '</li>';
+      if (isset($this->_displays[$aff]))
+        $elements .= '<li'.$attributes_string.'>' . $this->_displays[$aff]['function']($post) . '</li>';
     }
     wp_reset_postdata();
     return '
