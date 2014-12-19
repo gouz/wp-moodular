@@ -2,7 +2,7 @@
 
 class Moodular
 {
-  private $_version = 4.5;
+  private $_version = 4.5.1;
   private $_effects = array();
   private $_controls = array();
   private $_displays = array();
@@ -108,6 +108,8 @@ class Moodular
       'post_type' => 'moodular',
       'orderby' => $ordre,
       'order' => 'ASC',
+      'pagination' => false,
+      'posts_per_page' => -1,
       'tax_query' => array(
         array(
           'taxonomy' => 'moodular_category',
