@@ -2,7 +2,7 @@
 
 class Moodular
 {
-  private $_version = 4.5.1;
+  private $_version = '4.5.1';
   private $_effects = array();
   private $_controls = array();
   private $_displays = array();
